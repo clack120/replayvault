@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>osu.Game.Rulesets.ReplayVaultAddon</RootNamespace>
+    <AssemblyName>osu.Game.Rulesets.ReplayVaultAddon</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DebugType>None</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <PathMap>$(MSBuildProjectDirectory)=/src/ReplayVaultAddon</PathMap>
+    <SentryDisableSourceGenerator>true</SentryDisableSourceGenerator>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\osu.Game\osu.Game.csproj" />
+  </ItemGroup>
+
+  <Target Name="RemoveSentryProjectMetadata" AfterTargets="WriteSentryAttributes">
+    <ItemGroup>
+      <Compile Remove="$(IntermediateOutputPath)$(SentryAttributesFile)" />
+    </ItemGroup>
+  </Target>
+</Project>
