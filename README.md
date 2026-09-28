@@ -19,7 +19,7 @@ saving failed local plays.
 
 ```sh
 ./build-addon.sh
-cp dist/osu.Game.Rulesets.ReplayVaultAddon.dll \
+cp dist/osu.Game.Rulesets.ReplayVaultAddon-net10.0.dll \
   ~/.local/share/osu/rulesets/
 ```
 
