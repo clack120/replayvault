@@ -9,10 +9,11 @@ saving failed local plays.
 - Builds replays from spectator streams when possible.
 - Falls back to server downloads when stream capture is unavailable.
 - Saves failed local plays, including instant-restart attempts.
-- Optionally appends successful local scores (including other players' stored replays) of the selected map to the
-  end of the Global leaderboard (Settings > Rulesets > Replay Vault Addon, off by default). They are ranked after the
-  online scores (#51, #52, ...) because the song select list numbers its rows by index; online ranks are unchanged,
-  and scores already on the online list are not repeated.
+- Optionally adds successful local scores of the played map (the player's own and other players' stored
+  replays) to the leaderboard shown while playing, when the Global scope is selected (Settings > Rulesets > Replay
+  Vault Addon, off by default). They are merged only while the player screen is active; song select and the results
+  screen keep the plain online list. Local scores have no online position, so on a partial online leaderboard the
+  in-play list shows them as "-"; scores already on the online list are not repeated.
 - Logs the profile pp and global rank change of every submitted score (the "+x pp, +#x" osu! only flashes in the
   toolbar) to the runtime log, stdout and
   `~/.local/share/osu/rulesets/replayvault/submits.jsonl`, and optionally posts it as a notification. It uses the statistics update osu! already receives,
@@ -63,7 +64,7 @@ The JSON keys use their C# property names:
 
 The Settings → Rulesets panel provides the main download on/off toggle and a toggle for the in-game
 notification that shows the pp and rank change after a score submission and a toggle for the local scores in the
-Global leaderboard (both off by default; the runtime log,
+in-play Global leaderboard (both off by default; the runtime log,
 stdout and `submits.jsonl` entries are always written).
 
 ## Limitations

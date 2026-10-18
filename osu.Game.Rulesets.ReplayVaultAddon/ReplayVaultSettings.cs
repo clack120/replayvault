@@ -107,7 +107,7 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
                             }) { ShowRevertToDefaultButton = false },
                             new SettingsItemV2(new FormCheckBox
                             {
-                                Caption = "Add successful local scores (incl. other players' replays) to the Global leaderboard",
+                                Caption = "Add successful local scores (incl. other players' replays) to the in-play Global leaderboard",
                                 Current = mergeLocalScores
                             }) { ShowRevertToDefaultButton = false },
                             row("Service", serviceState),

@@ -72,7 +72,7 @@ public partial class ReplayVaultRuleset : Ruleset
             LeaderboardManager? leaderboardManager)
         {
             ReplayVaultRuntime.TryStart(storage, multiplayerClient, spectatorClient, api, scoreManager, realm, rulesetStore, gameBase.Version);
-            LocalScoreMerger.Start(leaderboardManager, realm);
+            LocalScoreMerger.Start(leaderboardManager, realm, gameBase);
             SubmitDeltaReporter.Start(statisticsWatcher, notifications, storage.GetStorageForDirectory("rulesets").GetFullPath("replayvault", true));
         }
 
