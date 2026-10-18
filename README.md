@@ -9,6 +9,10 @@ saving failed local plays.
 - Builds replays from spectator streams when possible.
 - Falls back to server downloads when stream capture is unavailable.
 - Saves failed local plays, including instant-restart attempts.
+- Logs the profile pp and global rank change of every submitted score (the "+x pp, +#x" osu! only flashes in the
+  toolbar) to the runtime log, stdout, the notification overlay and
+  `~/.local/share/osu/rulesets/replayvault/submits.jsonl`. It uses the statistics update osu! already receives,
+  so it sends no extra requests.
 
 ## Requirements
 
@@ -16,6 +20,9 @@ saving failed local plays.
 - A compatible osu!lazer source checkout
 
 ## Build and install
+
+Build against the osu!lazer source commit that matches the installed game (the addon uses internal APIs);
+the installed version is in `osu.Game.dll`'s informational version.
 
 ```sh
 ./build-addon.sh

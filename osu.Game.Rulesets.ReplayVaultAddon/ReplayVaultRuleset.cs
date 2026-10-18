@@ -6,7 +6,9 @@ using osu.Game.Beatmaps;
 using osu.Game.Database;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Overlays;
 using osu.Game.Overlays.Settings;
+using osu.Game.Online;
 using osu.Game.Online.API;
 using osu.Game.Online.Multiplayer;
 using osu.Game.Online.Spectator;
@@ -54,7 +56,7 @@ public partial class ReplayVaultRuleset : Ruleset
 
     private sealed partial class Icon : CompositeDrawable
     {
-        [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader(permitNulls: true)]
         private void load(
             Storage storage,
             MultiplayerClient multiplayerClient,
@@ -63,9 +65,12 @@ public partial class ReplayVaultRuleset : Ruleset
             ScoreManager scoreManager,
             RealmAccess realm,
             RulesetStore rulesetStore,
-            OsuGameBase gameBase)
+            OsuGameBase gameBase,
+            UserStatisticsWatcher? statisticsWatcher,
+            INotificationOverlay? notifications)
         {
             ReplayVaultRuntime.TryStart(storage, multiplayerClient, spectatorClient, api, scoreManager, realm, rulesetStore, gameBase.Version);
+            SubmitDeltaReporter.Start(statisticsWatcher, notifications, storage.GetStorageForDirectory("rulesets").GetFullPath("replayvault", true));
         }
 
         public Icon()
