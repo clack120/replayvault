@@ -10,8 +10,8 @@ saving failed local plays.
 - Falls back to server downloads when stream capture is unavailable.
 - Saves failed local plays, including instant-restart attempts.
 - Logs the profile pp and global rank change of every submitted score (the "+x pp, +#x" osu! only flashes in the
-  toolbar) to the runtime log, stdout, the notification overlay and
-  `~/.local/share/osu/rulesets/replayvault/submits.jsonl`. It uses the statistics update osu! already receives,
+  toolbar) to the runtime log, stdout and
+  `~/.local/share/osu/rulesets/replayvault/submits.jsonl`, and optionally posts it as a notification. It uses the statistics update osu! already receives,
   so it sends no extra requests.
 
 ## Requirements
@@ -51,11 +51,14 @@ The JSON keys use their C# property names:
   "SecondSweepDelaySeconds": 30,
   "DumpEnabled": true,
   "SaveFailedPlays": true,
-  "AssembleFromStream": true
+  "AssembleFromStream": true,
+  "ShowSubmitNotification": false
 }
 ```
 
-The Settings → Rulesets panel provides the main download on/off toggle.
+The Settings → Rulesets panel provides the main download on/off toggle and a toggle for the in-game
+notification that shows the pp and rank change after a score submission (off by default; the runtime log,
+stdout and `submits.jsonl` entries are always written).
 
 ## Limitations
 

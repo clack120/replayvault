@@ -48,6 +48,7 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
     private sealed partial class StatusPanel : CompositeDrawable
     {
         private readonly BindableBool enabled = new(true);
+        private readonly BindableBool showSubmitNotification = new(false);
 
         private readonly OsuSpriteText serviceState = valueText();
         private readonly OsuSpriteText lastEvent = valueText();
@@ -98,6 +99,11 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
                                 Caption = "Auto-download all replays at multiplayer results",
                                 Current = enabled
                             }) { ShowRevertToDefaultButton = false },
+                            new SettingsItemV2(new FormCheckBox
+                            {
+                                Caption = "Show pp and rank change notification after score submission",
+                                Current = showSubmitNotification
+                            }) { ShowRevertToDefaultButton = false },
                             row("Service", serviceState),
                             row("Last Event", lastEvent),
                             row("Last Fetch", lastFetch),
@@ -120,6 +126,13 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
             {
                 if (ReplayVaultRuntime.Enabled != e.NewValue)
                     ReplayVaultRuntime.Enabled = e.NewValue;
+            });
+
+            showSubmitNotification.Value = ReplayVaultRuntime.ShowSubmitNotification;
+            showSubmitNotification.BindValueChanged(e =>
+            {
+                if (ReplayVaultRuntime.ShowSubmitNotification != e.NewValue)
+                    ReplayVaultRuntime.ShowSubmitNotification = e.NewValue;
             });
         }
 

@@ -48,6 +48,17 @@ public static class ReplayVaultRuntime
         }
     }
 
+    /// <summary>Whether the in-game notification with the pp and rank change after a score submission is shown.</summary>
+    public static bool ShowSubmitNotification
+    {
+        get => config.ShowSubmitNotification;
+        set
+        {
+            config.ShowSubmitNotification = value;
+            saveConfig();
+        }
+    }
+
     public static void TryStart(
         Storage storage,
         MultiplayerClient multiplayerClient,
@@ -485,5 +496,6 @@ public static class ReplayVaultRuntime
 
         public bool AssembleFromStream { get; set; } = true;
 
+        public bool ShowSubmitNotification { get; set; } = false;
     }
 }

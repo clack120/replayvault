@@ -10,7 +10,7 @@ namespace osu.Game.Rulesets.ReplayVaultAddon.Services;
 /// <summary>
 /// Persists the "+x pp, +#x" change that osu! only flashes in the toolbar after a score is submitted.
 /// It listens to the statistics update osu! already receives for the submitted score, so it makes no extra
-/// requests. Each update is written to the runtime log, stdout, a JSONL file and the notification overlay.
+/// requests. Each update is written to the runtime log, stdout and a JSONL file; the notification overlay entry is optional (setting, off by default).
 /// </summary>
 public static class SubmitDeltaReporter
 {
@@ -79,7 +79,8 @@ public static class SubmitDeltaReporter
                 rankAfter,
             }) + "\n");
 
-            notifications?.Post(new SimpleNotification { Text = $"{signed(ppDelta, "0.00")}pp, rank {signed(rankDelta, "0")}  -  {map} {scorePp}" });
+            if (ReplayVaultRuntime.ShowSubmitNotification)
+                notifications?.Post(new SimpleNotification { Text = $"{signed(ppDelta, "0.00")}pp, rank {signed(rankDelta, "0")}  -  {map} {scorePp}" });
         }
         catch (Exception e)
         {
