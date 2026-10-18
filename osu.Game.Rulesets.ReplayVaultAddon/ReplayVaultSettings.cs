@@ -49,6 +49,7 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
     {
         private readonly BindableBool enabled = new(true);
         private readonly BindableBool showSubmitNotification = new(false);
+        private readonly BindableBool mergeLocalScores = new(false);
 
         private readonly OsuSpriteText serviceState = valueText();
         private readonly OsuSpriteText lastEvent = valueText();
@@ -104,6 +105,11 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
                                 Caption = "Show pp and rank change notification after score submission",
                                 Current = showSubmitNotification
                             }) { ShowRevertToDefaultButton = false },
+                            new SettingsItemV2(new FormCheckBox
+                            {
+                                Caption = "Add successful local scores (incl. other players' replays) to the Global leaderboard",
+                                Current = mergeLocalScores
+                            }) { ShowRevertToDefaultButton = false },
                             row("Service", serviceState),
                             row("Last Event", lastEvent),
                             row("Last Fetch", lastFetch),
@@ -133,6 +139,13 @@ public sealed partial class ReplayVaultSettings : RulesetSettingsSubsection
             {
                 if (ReplayVaultRuntime.ShowSubmitNotification != e.NewValue)
                     ReplayVaultRuntime.ShowSubmitNotification = e.NewValue;
+            });
+
+            mergeLocalScores.Value = ReplayVaultRuntime.MergeLocalScores;
+            mergeLocalScores.BindValueChanged(e =>
+            {
+                if (ReplayVaultRuntime.MergeLocalScores != e.NewValue)
+                    ReplayVaultRuntime.MergeLocalScores = e.NewValue;
             });
         }
 

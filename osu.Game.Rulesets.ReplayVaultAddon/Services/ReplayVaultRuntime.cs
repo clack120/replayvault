@@ -59,6 +59,17 @@ public static class ReplayVaultRuntime
         }
     }
 
+    /// <summary>Whether successful local scores are appended to the Global leaderboard.</summary>
+    public static bool MergeLocalScores
+    {
+        get => config.MergeLocalScores;
+        set
+        {
+            config.MergeLocalScores = value;
+            saveConfig();
+        }
+    }
+
     public static void TryStart(
         Storage storage,
         MultiplayerClient multiplayerClient,
@@ -497,5 +508,7 @@ public static class ReplayVaultRuntime
         public bool AssembleFromStream { get; set; } = true;
 
         public bool ShowSubmitNotification { get; set; } = false;
+
+        public bool MergeLocalScores { get; set; } = false;
     }
 }

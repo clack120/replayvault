@@ -9,6 +9,7 @@ using osu.Game.Graphics.Sprites;
 using osu.Game.Overlays;
 using osu.Game.Overlays.Settings;
 using osu.Game.Online;
+using osu.Game.Online.Leaderboards;
 using osu.Game.Online.API;
 using osu.Game.Online.Multiplayer;
 using osu.Game.Online.Spectator;
@@ -67,9 +68,11 @@ public partial class ReplayVaultRuleset : Ruleset
             RulesetStore rulesetStore,
             OsuGameBase gameBase,
             UserStatisticsWatcher? statisticsWatcher,
-            INotificationOverlay? notifications)
+            INotificationOverlay? notifications,
+            LeaderboardManager? leaderboardManager)
         {
             ReplayVaultRuntime.TryStart(storage, multiplayerClient, spectatorClient, api, scoreManager, realm, rulesetStore, gameBase.Version);
+            LocalScoreMerger.Start(leaderboardManager, realm);
             SubmitDeltaReporter.Start(statisticsWatcher, notifications, storage.GetStorageForDirectory("rulesets").GetFullPath("replayvault", true));
         }
 
